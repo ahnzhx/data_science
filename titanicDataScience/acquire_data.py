@@ -91,7 +91,6 @@ train_df.head()
 train_df = train_df.drop(['Name', 'PassengerId'], axis=1)
 test_df = test_df.drop(['Name'], axis=1)
 combine = [train_df, test_df]
-train_df.shape, test_df.shape
 
 # converting a categorical feature
 for dataset in combine:
@@ -105,7 +104,6 @@ grid.map(plt.hist, 'Age', alpha=.5, bins=20)
 grid.add_legend()
 
 guess_ages = np.zeros((2,3))
-guess_ages
 
 for dataset in combine:
     for i in range(0, 2):
@@ -173,7 +171,6 @@ train_df.loc[:, ['Age*Class', 'Age', 'Pclass']].head(10)
 
 # Completing a categorical feature
 freq_port = train_df.Embarked.dropna().mode()[0]
-freq_port
 
 for dataset in combine:
     dataset['Embarked'] = dataset['Embarked'].fillna(freq_port)
@@ -206,10 +203,10 @@ combine = [train_df, test_df]
 train_df.head(10)
 
 
-
-X_train = train_df.drop("Survived", axis=1)
+# ======= trained data ========
+X_train = train_df.drop('Survived', axis=1)
 Y_train = train_df["Survived"]
-X_test  = test_df.drop("PassengerId", axis=1).copy()
+X_test  = test_df.drop('PassengerId', axis=1).copy()
 # X_train.shape, Y_train.shape, X_test.shape
 
 # Logistic Regression
