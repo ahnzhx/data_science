@@ -206,15 +206,20 @@ combine = [train_df, test_df]
 train_df.head(10)
 
 
+
 X_train = train_df.drop("Survived", axis=1)
 Y_train = train_df["Survived"]
 X_test  = test_df.drop("PassengerId", axis=1).copy()
 # X_train.shape, Y_train.shape, X_test.shape
 
+# Logistic Regression
 logreg = LogisticRegression()
 logreg.fit(X_train, Y_train)
 Y_pred = logreg.predict(X_test)
 acc_log = round(logreg.score(X_train, Y_train) * 100, 2)
+print(acc_log)
+
+
 
 coeff_df = pd.DataFrame(train_df.columns.delete(0))
 coeff_df.columns = ['Feature']
@@ -235,14 +240,12 @@ knn = KNeighborsClassifier(n_neighbors = 3)
 knn.fit(X_train, Y_train)
 Y_pred = knn.predict(X_test)
 acc_knn = round(knn.score(X_train, Y_train) * 100, 2)
-acc_knn
 
 
 # Gaussian Naive Bayes
 gaussian = GaussianNB()
 gaussian.fit(X_train, Y_train)
 Y_pred = gaussian.predict(X_test)
-# acc_gaussian = round(gaussian.score(X_train, Y_train) * 100, 2)
 acc_gaussian = round(gaussian.score(X_train, Y_train) * 100, 2)
 
 # Perceptron
@@ -276,9 +279,6 @@ Y_pred = random_forest.predict(X_test)
 random_forest.score(X_train, Y_train)
 acc_random_forest = round(random_forest.score(X_train, Y_train) * 100, 2)
 
-
-
-# Model evaluation
 models = pd.DataFrame({
     'Model': ['Support Vector Machines', 'KNN', 'Logistic Regression',
               'Random Forest', 'Naive Bayes', 'Perceptron',
